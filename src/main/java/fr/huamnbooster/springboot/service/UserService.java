@@ -1,11 +1,13 @@
 package fr.huamnbooster.springboot.service;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import fr.huamnbooster.springboot.DTO.UserDTO;
+import fr.huamnbooster.springboot.jsonview.UserJsonView;
 import fr.huamnbooster.springboot.mapper.UserMapper;
 import fr.huamnbooster.springboot.model.User;
 import fr.huamnbooster.springboot.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +17,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
+    @JsonView(UserJsonView.showUserSimple.class)
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -30,6 +34,7 @@ public class UserService {
 
     public UserDTO createUser(UserDTO userDTO) {
         User user = UserMapper.toUser(userDTO);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.saveAndFlush(user);
         return UserMapper.toUserDto(savedUser);
     }

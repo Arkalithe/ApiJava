@@ -28,7 +28,6 @@ public class Reservation {
 
     @ManyToOne
     @NotNull
-    @JsonView(ReservationJsonView.showReservationSimple.class)
     private Borne borne;
 
     @Column(nullable = false)

@@ -1,6 +1,8 @@
 package fr.huamnbooster.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import fr.huamnbooster.springboot.enumeration.Roles;
+import fr.huamnbooster.springboot.jsonview.UserJsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.EqualsAndHashCode;
@@ -23,18 +25,21 @@ public class User {
 
     @Column(nullable = false)
     @NotBlank
+    @JsonView(UserJsonView.showUserSimple.class)
     private String nom;
 
     @Column(unique = true, nullable = false)
     @NotBlank
     @Email
+    @JsonView(UserJsonView.showUserSimple.class)
     private String email;
 
     @Column(nullable = false)
     @NotBlank
     @Size(min = 8)
+    @JsonView(UserJsonView.showUserSimple.class)
     private String password;
-    
+
     @Column(nullable = false)
     @NotNull
     private Roles role;
