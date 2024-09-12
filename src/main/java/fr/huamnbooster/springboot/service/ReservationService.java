@@ -1,6 +1,9 @@
 package fr.huamnbooster.springboot.service;
 
+import fr.huamnbooster.springboot.DTO.ReservationDTO;
 import fr.huamnbooster.springboot.enumeration.StatutReservation;
+import fr.huamnbooster.springboot.mapper.ReservationMapper;
+import fr.huamnbooster.springboot.mapper.UserMapper;
 import fr.huamnbooster.springboot.model.Borne;
 import fr.huamnbooster.springboot.model.Reservation;
 import fr.huamnbooster.springboot.model.User;
@@ -30,8 +33,10 @@ public class ReservationService {
         return reservationRepository.findReservationByUser(user);
     }
 
-    public Reservation createReservation(Reservation reservation) {
-        return reservationRepository.saveAndFlush(reservation);
+    public ReservationDTO createReservation(ReservationDTO reservationDTO) {
+        Reservation reservation = ReservationMapper.toReservation(reservationDTO);
+        Reservation reservationUser = reservationRepository.saveAndFlush(reservation);
+        return ReservationMapper.toReservationDto(reservationUser);
     }
 
     public List<Reservation> findReservationsByBorne(Long id) {

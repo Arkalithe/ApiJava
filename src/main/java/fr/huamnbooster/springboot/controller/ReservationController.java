@@ -1,6 +1,7 @@
 package fr.huamnbooster.springboot.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import fr.huamnbooster.springboot.DTO.ReservationDTO;
 import fr.huamnbooster.springboot.enumeration.StatutReservation;
 import fr.huamnbooster.springboot.jsonview.ReservationJsonView;
 import fr.huamnbooster.springboot.model.Borne;
@@ -33,8 +34,9 @@ public class ReservationController {
 
     @PostMapping("/create")
     @JsonView(ReservationJsonView.showReservationSimple.class)
-    public Reservation createReservation(@RequestBody Reservation reservation) {
-        return reservationService.createReservation(reservation);
+    public ResponseEntity<ReservationDTO> createReservation(@RequestBody ReservationDTO reservationDTO) {
+        return ResponseEntity.ok(reservationService.createReservation(reservationDTO));
+
     }
 
     @PutMapping("/{id}")

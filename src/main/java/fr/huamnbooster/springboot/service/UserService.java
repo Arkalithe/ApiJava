@@ -1,8 +1,11 @@
 package fr.huamnbooster.springboot.service;
 
+import fr.huamnbooster.springboot.DTO.UserDTO;
+import fr.huamnbooster.springboot.mapper.UserMapper;
 import fr.huamnbooster.springboot.model.User;
 import fr.huamnbooster.springboot.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,8 +28,10 @@ public class UserService {
         return userRepository.findByNomContaining(nom);
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserDTO createUser(UserDTO userDTO) {
+        User user = UserMapper.toUser(userDTO);
+        User savedUser = userRepository.saveAndFlush(user);
+        return UserMapper.toUserDto(savedUser);
     }
 
     public User updateUser(Long id, User user) {
@@ -42,7 +47,6 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
-
 
 
 }

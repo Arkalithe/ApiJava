@@ -1,5 +1,6 @@
 package fr.huamnbooster.springboot.controller;
 
+import fr.huamnbooster.springboot.DTO.UserDTO;
 import fr.huamnbooster.springboot.model.User;
 import fr.huamnbooster.springboot.service.UserService;
 import lombok.AllArgsConstructor;
@@ -33,8 +34,8 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+        return ResponseEntity.ok(userService.createUser(userDTO));
     }
 
     @PutMapping("/{id}")
