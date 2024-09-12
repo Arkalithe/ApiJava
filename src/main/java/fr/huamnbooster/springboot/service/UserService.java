@@ -54,4 +54,12 @@ public class UserService {
     }
 
 
+    public User login(String nom, String password, Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null && user.getNom().equals(nom) && passwordEncoder.matches(password, user.getPassword())) {
+            return user;
+        } else {
+            return null;
+        }
+    }
 }

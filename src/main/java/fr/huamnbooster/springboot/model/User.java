@@ -1,5 +1,6 @@
 package fr.huamnbooster.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import fr.huamnbooster.springboot.enumeration.Roles;
 import fr.huamnbooster.springboot.jsonview.UserJsonView;

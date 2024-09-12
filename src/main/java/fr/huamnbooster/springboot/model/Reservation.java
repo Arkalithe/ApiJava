@@ -1,5 +1,6 @@
 package fr.huamnbooster.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import fr.huamnbooster.springboot.enumeration.StatutReservation;
 import fr.huamnbooster.springboot.jsonview.ReservationJsonView;
@@ -24,10 +25,12 @@ public class Reservation {
 
     @ManyToOne
     @NotNull
+    @JsonBackReference
     private User user;
 
     @ManyToOne
     @NotNull
+    @JsonBackReference
     private Borne borne;
 
     @Column(nullable = false)

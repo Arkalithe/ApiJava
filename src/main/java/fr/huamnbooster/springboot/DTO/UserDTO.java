@@ -1,6 +1,7 @@
 package fr.huamnbooster.springboot.DTO;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import fr.huamnbooster.springboot.enumeration.Roles;
 import fr.huamnbooster.springboot.jsonview.UserJsonView;
 import lombok.*;
 
@@ -10,4 +11,5 @@ public class UserDTO {
     private String nom;
     private String email;
     private String password;
+    private Roles role;
 }
