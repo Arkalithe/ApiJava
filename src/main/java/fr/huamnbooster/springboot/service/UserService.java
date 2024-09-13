@@ -54,10 +54,10 @@ public class UserService {
     }
 
 
-    public User login(String nom, String password, Long id) {
-        User user = userRepository.findById(id).orElse(null);
+    public UserDTO login(String nom, String password) {
+        User user = userRepository.findByNom(nom);
         if (user != null && user.getNom().equals(nom) && passwordEncoder.matches(password, user.getPassword())) {
-            return user;
+            return UserMapper.toUserDto(user);
         } else {
             return null;
         }

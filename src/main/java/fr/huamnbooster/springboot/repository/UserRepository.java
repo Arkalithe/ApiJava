@@ -1,5 +1,6 @@
 package fr.huamnbooster.springboot.repository;
 
+import fr.huamnbooster.springboot.DTO.UserDTO;
 import fr.huamnbooster.springboot.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByNomContaining(String nom);
 
-    User login(String nom, String password, Long id);
+    UserDTO login(String nom, String password);
 
 
 }

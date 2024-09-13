@@ -1,9 +1,13 @@
 package fr.huamnbooster.springboot.controller;
 
+import fr.huamnbooster.springboot.DTO.LoginRequestDTO;
 import fr.huamnbooster.springboot.DTO.UserDTO;
+import fr.huamnbooster.springboot.mapper.UserMapper;
 import fr.huamnbooster.springboot.model.User;
 import fr.huamnbooster.springboot.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,5 +52,11 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
-    
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
+        UserDTO userDto = userService.login(loginRequestDTO.getNom(), loginRequestDTO.getPassword());
+        return ResponseEntity.ok(userDto);
+    }
+
 }
