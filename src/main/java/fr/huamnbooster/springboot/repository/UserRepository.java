@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByNomContaining(String nom);
 
-    UserDTO login(String nom, String password);
+    User findByNomAndPassword(String nom, String password);
 
 
 }

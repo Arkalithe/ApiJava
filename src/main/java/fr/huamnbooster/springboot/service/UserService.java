@@ -54,8 +54,8 @@ public class UserService {
     }
 
 
-    public UserDTO login(String nom, String password) {
-        User user = userRepository.findByNom(nom);
+    public UserDTO findByUsernameAndPassword(String nom, String password) {
+        User user = userRepository.findByNomAndPassword(nom, password);
         if (user != null && user.getNom().equals(nom) && passwordEncoder.matches(password, user.getPassword())) {
             return UserMapper.toUserDto(user);
         } else {
